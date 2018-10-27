@@ -18,6 +18,7 @@ public class UsersController {
 		return "Test Users Controller Done. This is public.";
 	}
 	
+
 	@GetMapping("private/test")
 	public String testPrivate() {
 		return "Test Users Controller Done. This is private.";

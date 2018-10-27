@@ -1,34 +1,52 @@
 package com.mynotes.app.config;
 
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.WebSecurityEnablerConfiguration;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+@Configuration
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityEnablerConfiguration {
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+	@Autowired
+	private DataSource dataSource;
+	
+	@Override
 	protected void configure(HttpSecurity http) throws Exception {
- 		http.authorizeRequests()
+ 		http
+ 		.csrf().disable()
+ 		.authorizeRequests()
+ 				.antMatchers("/users/**").authenticated()
+ 				.antMatchers("/users/private/**").hasRole("USER")
  				.antMatchers("/users/public/**").permitAll()
- 				.antMatchers("/users/private/**").hasAnyRole("USER")
  				
  			.and()
- 				.formLogin().permitAll()
+ 				.formLogin()
  			.and()
+ 		
  				//login?logout
- 				.logout().permitAll();
+ 				.logout().deleteCookies("JSESSIONID").invalidateHttpSession(false).clearAuthentication(true)
+ 				.logoutUrl("/logout").logoutSuccessUrl("/login")
+ 			.and()
+ 				.httpBasic();
  	}
 	
 	@Autowired
  	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
- 		auth
- 			.inMemoryAuthentication()
- 				.withUser("user").password("{noop}password").roles("USER")
- 			.and()
- 				.withUser("admin").password("{noop}password").roles("USER", "ADMIN");
+ 		auth.jdbcAuthentication().dataSource(dataSource).passwordEncoder(new BCryptPasswordEncoder());
+ 		
+ 		
+// 			.inMemoryAuthentication()
+// 				.withUser("user").password("{noop}password").roles("USER")
+// 			.and()
+// 				.withUser("admin").password("{noop}password").roles("USER", "ADMIN");
  	}
 	
 	
