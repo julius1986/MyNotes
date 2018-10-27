@@ -19,7 +19,7 @@ public class SecurityConfig extends WebSecurityEnablerConfiguration {
  				.formLogin().permitAll()
  			.and()
  				//login?logout
- 				.logout().logoutSuccessUrl("/login").permitAll();
+ 				.logout().permitAll();
  	}
 	
 	@Autowired
