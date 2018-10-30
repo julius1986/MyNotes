@@ -1,9 +1,11 @@
 package com.mynotes.app.controllers.test;
 
+import java.security.Principal;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,14 +30,29 @@ public class ShowAll {
 		return "Test Users Controller Done";
 	}
 	
-	@GetMapping("notes")
-	public List<Notes> getAllNotes() {
-		return notesService.getAllNotes();
-	}
-	
 	@GetMapping("users")
 	public List<Users> getAllUsers() {
 		return usersService.getAll();
 	}
+		
+	/*
+	 fetch("http://localhost:8080/test/notes",{method:"POST", 
+	 headers:{ "Content-Type" : "application/json" }, body:JSON.stringify({note:"lalala" }) })
+	 .then(function(res){console.log(res)});
+	  
+	  
+	 */
+	
+	@PostMapping("notes")
+	public String addNewNotes(@RequestBody Notes notes, Principal principal) {
+		Users user = usersService.getByName(principal.getName());
+		notes.setUsers(user);
+		notesService.addNewNotes(notes);
+		
+		return "done";
+	}
+	
+	
+	
 
 }

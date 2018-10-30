@@ -6,7 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -38,11 +37,12 @@ public class Notes {
 		this.id = id;
 	}
 
-	public String getText() {
+
+	public String getNote() {
 		return note;
 	}
 
-	public void setText(String note) {
+	public void setNote(String note) {
 		this.note = note;
 	}
 
@@ -52,6 +52,11 @@ public class Notes {
 
 	public void setUsers(Users users) {
 		this.users = users;
+	}
+
+	@Override
+	public String toString() {
+		return "Notes [id=" + id + ", note=" + note + ", users=" + users + "]";
 	}
 	
 	
