@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,7 +31,7 @@ public class NotesController {
 	
 	
 	@GetMapping
-	public JSONAnswer getNotesForCurrentUser(Principal principal){
+	public JSONAnswer getAllNotesForCurrentUser(Principal principal){
 		try {
 			Users user = usersService.getByName(principal.getName());
 			List<Notes> notes = noteService.findAllNotesByUserId(user.getId());
@@ -99,7 +100,7 @@ public class NotesController {
 			}
 			if (deletingNote != null) {
 				noteService.deleteNoteById(deletingNote);	
-				jsonAnswer = new JSONAnswer("Note added, back this note", "200", true, null);
+				jsonAnswer = new JSONAnswer("Note deleted, back this note", "200", true, null);
 			}else {
 				jsonAnswer = new JSONAnswer("Error, cant find note", "200", false, null);
 			}
