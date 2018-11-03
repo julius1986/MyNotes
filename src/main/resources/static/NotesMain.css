@@ -1,0 +1,64 @@
+
+
+@font-face {
+    font-family: Setta Script; /* ָלÿ רנטפעא */
+    src: url(fonts/Setta Script.ttf); /* ֿףעü ך פאיכף סמ רנטפעמל */
+ }
+
+body{
+	font-family:"Setta Script"; 
+}
+
+.login-container{
+height: 100vh;
+width: 100vw;
+display: flex;
+justify-content:center;
+align-items: center;
+background: url(img/desk.jpg) no-repeat;
+background-size: 100%;
+}
+
+
+.login-container .login-form{
+padding:3%;
+background: url(img/note.jpg) repeat-y center;
+	background-size:contain;
+}
+.login-container form .login-field {
+	display: block;
+    text-decoration: none;
+    background: none;
+    border: none;
+    border-bottom: 1px black solid;
+    margin-top: 10px;
+
+}
+
+
+.login-container form .login-field:active, :hover, :focus {
+    outline: 0;
+    outline-offset: 0;
+}
+
+
+
+.login-container form .login-button {
+    position: relative;
+    margin-top: 10px;
+    text-decoration: none;
+    background: none;
+    border: none;
+    border-bottom: 2px black solid;
+    padding: 0px;
+    width: 100%;
+    transition:all 1s;
+}
+
+.login-container form .login-button:hover {
+   
+	 text-decoration:underline;
+}
+
+
+

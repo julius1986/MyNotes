@@ -1,15 +1,11 @@
 package com.mynotes.app.controllers.test;
 
-import java.security.Principal;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mynotes.app.models.Notes;
 import com.mynotes.app.models.Users;
 import com.mynotes.app.services.NotesService;
 import com.mynotes.app.services.UsersService;
@@ -43,14 +39,7 @@ public class ShowAll {
 	  
 	 */
 	
-	@PostMapping("notes")
-	public String addNewNotes(@RequestBody Notes notes, Principal principal) {
-		Users user = usersService.getByName(principal.getName());
-		notes.setUsers(user);
-		notesService.addNewNotes(notes);
-		
-		return "done";
-	}
+
 	
 	
 	

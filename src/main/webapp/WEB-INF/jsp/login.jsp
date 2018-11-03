@@ -17,34 +17,43 @@
     <title>Log in with your credentials</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="NotesMain.css">
 </head>
 
 <body>
 
-<div class="container">
 
+
+	<div class="login-container">
+	<div class="login-form">
     <form method="POST" action="/login" class="form-signin">
-        <h2 class="form-heading">Log in</h2>
+        <h2 class="form-heading">My Notes</h2>
 
         <div class="form-group ">
             <span></span>
-            <input name="username" type="text" class="form-control" placeholder="Username"
+            <input name="username" type="text" class="login-field" placeholder="Username"
                    autofocus="true"/>
-            <input name="password" type="password" class="form-control" placeholder="Password"/>
+            <input name="password" type="password" class="login-field" placeholder="Password"/>
             <span></span>
 
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
+            <button class="login-button" type="submit">Log In</button>
         </div>
-
-    </form>
-
-	<c:if test = "${not empty errorMsg}">
+<div class="login-message">
+		<c:if test = "${not empty errorMsg}">
          <p><c:out value = "${errorMsg}"/><p>
       </c:if>
 <c:if test = "${not empty msg}">
          <p><c:out value = "${msg}"/><p>
       </c:if>
+	</div>
 
+
+
+    </form>
+
+  		</div>
+
+	
 </div>
 <!-- /container -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
