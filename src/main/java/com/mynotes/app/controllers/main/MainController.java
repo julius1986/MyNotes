@@ -19,4 +19,11 @@ public class MainController {
         return "login";
     }	
 	
+	@RequestMapping(value = "/app", method = RequestMethod.GET)
+    public String app() {
+		
+		System.out.println("sdfsd");
+        return "app";
+    }	
+	
 }
