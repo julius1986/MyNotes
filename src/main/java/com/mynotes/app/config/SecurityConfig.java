@@ -39,12 +39,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
  	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
  		auth.jdbcAuthentication().dataSource(dataSource).passwordEncoder(new BCryptPasswordEncoder());
- 		
- 		
-// 			.inMemoryAuthentication()
-// 				.withUser("user").password("{noop}password").roles("USER")
-// 			.and()
-// 				.withUser("admin").password("{noop}password").roles("USER", "ADMIN");
  	}
 	
 	
