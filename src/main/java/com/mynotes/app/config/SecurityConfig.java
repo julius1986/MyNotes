@@ -10,6 +10,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.mynotes.app.utils.EncoderForPass;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -26,6 +28,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
  				.antMatchers("/users/**").hasAnyRole("USER", "ADMIN")
  				.antMatchers("/notes/**").hasRole("USER")
  				.antMatchers("/app").hasRole("USER")
+ 				.antMatchers("/registration").not().authenticated()
  			.and()
  				.formLogin().loginPage("/login").permitAll().defaultSuccessUrl("/app")
  			.and()

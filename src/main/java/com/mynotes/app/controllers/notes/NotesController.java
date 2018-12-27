@@ -46,6 +46,9 @@ public class NotesController {
 	@PostMapping
 	public JSONAnswer addNoteForCurrentUser(@RequestBody Notes notes ,Principal principal){
 		try {
+			if(notes.getNote().length()<1 || notes.getNote() == null) {
+				return new JSONAnswer("Note is empty", "200", false, null);
+			}
 			Users user = usersService.getByName(principal.getName());
 			notes.setUsers(user);
 			noteService.addNewNote(notes);
@@ -66,7 +69,7 @@ public class NotesController {
 			Users user = usersService.getByName(principal.getName());
 			List<Notes> notes = noteService.findAllNotesByUserId(user.getId());
 			for (Notes tempNote : notes) {
-				if(tempNote.getId() == noteId) {
+				if(tempNote.getId().equals(noteId)) {
 					result = true;
 					break;
 				}
@@ -92,20 +95,20 @@ public class NotesController {
 			Users user = usersService.getByName(principal.getName());
 			List<Notes> notes = noteService.findAllNotesByUserId(user.getId());
 			Notes deletingNote = null;
-			for (Notes tempNote : notes) {
-				if(tempNote.getId() == noteId) {
+			for (Notes tempNote : notes) {			
+				if(tempNote.getId().equals(noteId) ) {
 					deletingNote = tempNote;
 					break;
 				}
 			}
 			if (deletingNote != null) {
 				noteService.deleteNoteById(deletingNote);	
-				jsonAnswer = new JSONAnswer("Note deleted, back this note", "200", true, null);
+				jsonAnswer = new JSONAnswer("Note was deleted, back this note", "200", true, null);
 			}else {
 				jsonAnswer = new JSONAnswer("Error, cant find note", "200", false, null);
 			}
 		} catch (Exception e) {
-			jsonAnswer = new JSONAnswer("Error, cant add note", "200", false, null);
+			jsonAnswer = new JSONAnswer("Error, find some exception in dleete=", "200", false, null);
 		}
 		
 		return jsonAnswer;
