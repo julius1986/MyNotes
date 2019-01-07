@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mynotes.app.models.Notes;
@@ -46,7 +47,7 @@ public class NotesController {
 	@PostMapping
 	public JSONAnswer addNoteForCurrentUser(@RequestBody Notes notes ,Principal principal){
 		try {
-			if(notes.getNote().length()<1 || notes.getNote() == null) {
+			if(notes.getText().length()<1 || notes.getText() == null) {
 				return new JSONAnswer("Note is empty", "200", false, null);
 			}
 			Users user = usersService.getByName(principal.getName());
@@ -61,11 +62,11 @@ public class NotesController {
 	}
 	
 	/*TODO update */
-	@PutMapping
-	public JSONAnswer updateNoteForCurrentUser(@RequestBody Notes updateNote ,Principal principal){
+	@PutMapping(value = "/{noteId}")
+	public JSONAnswer updateNoteForCurrentUser(@PathVariable Long noteId, @RequestBody Notes updateNote ,Principal principal){
 		try {
 			boolean result = false;
-			Long noteId = updateNote.getId();
+			//Long noteId = updateNote.getId();
 			Users user = usersService.getByName(principal.getName());
 			List<Notes> notes = noteService.findAllNotesByUserId(user.getId());
 			for (Notes tempNote : notes) {
@@ -75,8 +76,9 @@ public class NotesController {
 				}
 			}
 			if (result) {
+				updateNote.setUsers(user);
 				noteService.updateNote(updateNote);	
-				jsonAnswer = new JSONAnswer("Note updated, back this note", "200", true, notes);
+				jsonAnswer = new JSONAnswer("Note updated, back this note", "200", true, updateNote);
 			}else {
 				jsonAnswer = new JSONAnswer("Error, cant find note for update", "200", false, null);
 			}
@@ -89,8 +91,8 @@ public class NotesController {
 	
 	
 	/*TODO delete */
-	@DeleteMapping
-	public JSONAnswer deleteNoteForCurrentUser(@RequestBody Long noteId ,Principal principal){
+	@DeleteMapping(value = "/{noteId}")
+	public JSONAnswer deleteNoteForCurrentUser(@PathVariable Long noteId ,Principal principal){
 		try {
 			Users user = usersService.getByName(principal.getName());
 			List<Notes> notes = noteService.findAllNotesByUserId(user.getId());
@@ -103,7 +105,7 @@ public class NotesController {
 			}
 			if (deletingNote != null) {
 				noteService.deleteNoteById(deletingNote);	
-				jsonAnswer = new JSONAnswer("Note was deleted, back this note", "200", true, null);
+				jsonAnswer = new JSONAnswer("Note was deleted, back this note", "200", true, deletingNote);
 			}else {
 				jsonAnswer = new JSONAnswer("Error, cant find note", "200", false, null);
 			}

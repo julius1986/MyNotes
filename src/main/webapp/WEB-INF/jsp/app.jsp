@@ -3,7 +3,11 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
-</head>
+	<link rel=icon href=/favicon.ico><title>mynotes</title><link href=/css/app.css rel=preload as=style>
+  	<link href="/js/app.js" rel=preload as=script>
+  	<link href="/js/chunk-vendors.js" rel=preload as=script>
+  	<link href="/css/app.css" rel=stylesheet></head>
+	</head>
 <body>
 	
 	<div id="app">
@@ -16,9 +20,9 @@
 	</div>
 	</div>
 	
+	<script src="/js/chunk-vendors.js"></script>
+    <script src="/js/app.js"></script>
 	
-	
-	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
-	<script src="build.js"></script>
+
 </body>
 </html>

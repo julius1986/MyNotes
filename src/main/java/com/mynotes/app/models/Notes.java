@@ -21,8 +21,8 @@ public class Notes {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
-	@Column(name = "note")
-	private String note;
+	@Column(name = "text")
+	private String text;
 	
 	@JsonIgnore
 	@OneToOne
@@ -38,12 +38,12 @@ public class Notes {
 	}
 
 
-	public String getNote() {
-		return note;
+	public String getText() {
+		return text;
 	}
 
-	public void setNote(String note) {
-		this.note = note;
+	public void setText(String text) {
+		this.text = text;
 	}
 
 	public Users getUsers() {
@@ -56,7 +56,7 @@ public class Notes {
 
 	@Override
 	public String toString() {
-		return "Notes [id=" + id + ", note=" + note + ", users=" + users + "]";
+		return "Notes [id=" + id + ", text=" + text + ", users=" + users + "]";
 	}
 	
 	
