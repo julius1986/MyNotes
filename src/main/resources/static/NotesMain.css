@@ -23,7 +23,6 @@ background-size: cover;
 .login-container .login-form{
 padding:3%;
 background: url(img/note.jpg) repeat-y center;
-	background-size:cover;
 }
 .login-container form .login-field {
 	display: block;
@@ -60,5 +59,8 @@ background: url(img/note.jpg) repeat-y center;
 	 text-decoration:underline;
 }
 
+.form-links{
+	margin-top:16px;
+}
 
 

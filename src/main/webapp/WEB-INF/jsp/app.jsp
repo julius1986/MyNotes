@@ -2,11 +2,13 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Document</title>
-	<link rel=icon href=/favicon.ico><title>mynotes</title><link href=/css/app.css rel=preload as=style>
+	<title>Mynotes</title>
+	<link rel=icon href=/favicon.ico>
+	<link href=/css/app.css rel=preload as=style>
   	<link href="/js/app.js" rel=preload as=script>
   	<link href="/js/chunk-vendors.js" rel=preload as=script>
   	<link href="/css/app.css" rel=stylesheet></head>
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
 <body>
 	
