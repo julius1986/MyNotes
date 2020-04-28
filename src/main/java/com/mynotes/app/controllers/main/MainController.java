@@ -13,6 +13,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class MainController {
 
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+    public String start() {
+        return "login";
+    }	
+	
+	@RequestMapping(value = "/index", method = RequestMethod.GET)
+    public String index() {
+        return "login";
+    }
+	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model model, String error, String logout) {
         if (error != null) {
@@ -25,10 +35,6 @@ public class MainController {
         }
         return "login";
     }	
-	
-	
-	
-	
 	
 	@RequestMapping(value = "/app", method = RequestMethod.GET)
     public String app() {
